@@ -1,0 +1,373 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>Les capteurs- Table of Contents</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 3.8.0.560">
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/silver-theme/jquery-ui-1.8.12.custom.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/dynatree/chm/ui.dynatree.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="css/toc.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#tabs .ui-widget-header
+		{
+			background-color: #8080C0;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.dynatree.min.js"></script>
+	<script type="text/javascript" src="js/hndjsse.js"></script>
+	<script type="text/javascript">
+	
+		var bSearchDataLoaded = false;
+		var sHelpIdToActivate = '';
+	
+		$(document).ready(function()
+		{
+			var sAnchorName = '';
+			try { sAnchorName = top.location.href.substring(top.location.href.lastIndexOf("#") + 1, top.location.href.length); }
+			catch(err) { sAnchorName = ''; }
+			var nSelectedTab = 0;
+			if (sAnchorName == '_index') nSelectedTab = 1
+			else if (sAnchorName == '_search') nSelectedTab = 2;			
+			$("#tabs").tabs({
+				selected: nSelectedTab,
+				select: function(event, ui) { HideKwPopup(); }
+			});
+			
+			// Toc
+			if ($("#tab-toc").length) {
+				$("#tab-toc").dynatree({
+					clickFolderMode: 1,
+					debugLevel: 0,
+					imagePath: 'css/dynatree/chm/',
+					onActivate: function(node){
+						if ($("#tab-keywords").length && $("#tab-keywords").dynatree && $("#tab-keywords").dynatree("getTree") && $("#tab-keywords").dynatree("getTree").activateKey)
+							$("#tab-keywords").dynatree("getTree").activateKey(null);
+						if(node.data.href && node.data.href != '#'){
+							window.open(node.data.href, node.data.target);
+						}
+					}
+				});
+				// Expand all nodes if required
+				$("#tab-toc").dynatree("getRoot").visit(function(node){
+						node.expand(true);
+					});
+				// Select the active help id
+				if (sHelpIdToActivate != '') $("#tab-toc").dynatree("getTree").activateKey(sHelpIdToActivate);
+			}
+			
+			// Keywords
+			
+			if ($("#tab-keywords").length) {
+				$("#tab-keywords").dynatree({
+					clickFolderMode: 1,
+					debugLevel: 0,
+					imagePath: 'css/dynatree/chm/',
+					onClick: function(node, event){
+						HideKwPopup();
+						if (node.data && node.data.click)
+						{
+							var aRefList = null;
+							eval('aRefList=' + node.data.click);
+							if (ShowKwPopup(node.li, aRefList))
+							{
+								if ($("#tab-toc") && $("#tab-toc").dynatree && $("#tab-toc").dynatree("getTree") && $("#tab-toc").dynatree("getTree").activateKey)
+									$("#tab-toc").dynatree("getTree").activateKey(null);
+								if(node.data.href && node.data.href != '#'){
+									window.open(node.data.href, node.data.target);
+								}
+							}
+						}
+					}
+				});
+				// Expand all nodes if required
+				}
+			
+			// Load search data
+			$.getScript("js/searchdata.js",	function() {
+				bSearchDataLoaded = true;
+			});
+		});
+		
+		$('body').click(function() {
+			HideKwPopup();
+		});
+		
+		function SelectTocItem(sHelpId)
+		{
+			if ($("#tab-toc").length && $("#tab-toc").dynatree && $("#tab-toc").dynatree("getTree") && $("#tab-toc").dynatree("getTree").getNodeByKey) {
+				$("#tab-toc").dynatree("getTree").getNodeByKey(sHelpId).activateSilently();
+			}
+			else {
+				sHelpIdToActivate = sHelpId;
+			}
+		}
+		
+		function HideKwPopup()
+		{
+			if($("#popupMenu")) $("#popupMenu").remove();
+		}
+		
+		function ShowKwPopup(oSender, aLinks)
+		{
+			HideKwPopup();
+			if (!aLinks || !aLinks.length || aLinks.length == 0) return false
+			else if (aLinks.length == 1) return true
+			else
+			{
+				var oParentDiv = document.createElement("DIV");
+				oParentDiv.id = "popupMenu";
+				var oLink = null;
+				// Close button
+				oLink = document.createElement("SPAN");
+				oLink.className = "close-button";
+				oLink.innerHTML = "X";
+				oLink.href = "#";
+				oLink.onclick = HideKwPopup;
+				oParentDiv.appendChild(oLink);
+				// Items
+				for (var nCnt=0; nCnt<aLinks.length; nCnt++)
+				{
+					oLink = document.createElement("A");
+					oLink.innerHTML = aLinks[nCnt][0];
+					oLink.href = aLinks[nCnt][1];
+					oLink.target = "FrameMain";
+					oLink.onclick = HideKwPopup;
+					oParentDiv.appendChild(oLink);
+				}
+				document.body.appendChild(oParentDiv);
+				var pos = $(oSender).offset(); 
+				var height = $(oSender).height();
+				$(oParentDiv).css({
+					"left": (pos.left+20) + "px",
+					"top": (pos.top + height + 5) + "px"
+				});
+				$(oParentDiv).show();
+				return false;
+			}
+		}
+		
+		function PerformSearch()
+		{
+			sValue = $("#search_value").val();
+			$("#search_results").html('Searching...');
+			var oSearchEngine = new HndJsSe;
+			oSearchEngine.ParseInput(sValue);			
+			oSearchEngine.PerformSearch();
+			if (!oSearchEngine.aResults || !oSearchEngine.aResults.length)
+			{
+				$("#search_results").html('No results found.');
+			}
+			else
+			{
+				$("#search_results").html('<div id="search_results_content"></div>');
+				var oUl = $("#search_results_content").append("<ul id='lr'></ul>").find("ul");
+				for (var nCnt = 0; nCnt < oSearchEngine.aResults.length; nCnt++)
+				{
+					oUl.append("<li><a href='" + aTl[oSearchEngine.aResults[nCnt]][0] + "?search=" + escape(sValue) + "' target='FrameMain'>" + unescape(aTl[oSearchEngine.aResults[nCnt]][1]) + "</a></li>");
+				}
+				// Tree
+				$("#search_results_content").dynatree({
+					clickFolderMode: 1,
+					debugLevel: 0,
+					imagePath: 'css/dynatree/chm/',
+					onActivate: function(node){
+						if ($("#search_results_content") && $("#search_results_content").dynatree && $("#search_results_content").dynatree("getTree") && $("#search_results_content").dynatree("getTree").activateKey)
+							$("#search_results_content").dynatree("getTree").activateKey(null);
+						if(node.data.href && node.data.href != '#'){
+							window.open(node.data.href, node.data.target);
+						}
+					}
+				});
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#tab-toc">Sommaire</a></li>
+			<li><a href="#tab-search">Recherche</a></li>
+			</ul>
+		<div id="tab-toc">
+			<ul id="toc" class="">
+
+				<li class="folder" id="Prsentation" data="">
+							<a
+							href="Prsentation.html"
+							target="FrameMain">
+								Pr&eacute;sentation</a>
+
+				<ul><li class="" id="Introduction" data="icon: '10.png'">
+							<a
+							href="Introduction.html"
+							target="FrameMain">
+								Introduction</a>
+
+				</li></ul></li><li class="folder" id="LescapteursTOR" data="">
+							<a
+							href="LescapteursTOR.html"
+							target="FrameMain">
+								Les capteurs TOR</a>
+
+				<ul><li class="" id="Lescapteursmcaniquesouinterrupte" data="icon: '10.png'">
+							<a
+							href="Lescapteursmcaniquesouinterrupte.html"
+							target="FrameMain">
+								Les capteurs m&eacute;caniques ou interrupteurs de position</a>
+
+				</li><li class="" id="LescapteursdeproximitILS" data="icon: '10.png'">
+							<a
+							href="LescapteursdeproximitILS.html"
+							target="FrameMain">
+								Les capteurs de proximit&eacute; ILS</a>
+
+				</li><li class="" id="Lescapteursdeproximitinductifs" data="icon: '10.png'">
+							<a
+							href="Lescapteursdeproximitinductifs.html"
+							target="FrameMain">
+								Les capteurs de proximit&eacute; inductifs</a>
+
+				</li><li class="" id="Lescapteursdeproximitcapacitifs" data="icon: '10.png'">
+							<a
+							href="Lescapteursdeproximitcapacitifs.html"
+							target="FrameMain">
+								Les capteurs de proximit&eacute; capacitifs</a>
+
+				</li><li class="" id="Miseenuvredescapteursdeproximit" data="icon: '10.png'">
+							<a
+							href="Miseenuvredescapteursdeproximit.html"
+							target="FrameMain">
+								Mise en œuvre des capteurs de proximit&eacute;</a>
+
+				</li><li class="folder" id="Lescapteursphotolectriques" data="">
+							<a
+							href="Lescapteursphotolectriques.html"
+							target="FrameMain">
+								Les capteurs photo&eacute;lectriques</a>
+
+				<ul><li class="" id="Systmebarrage" data="icon: '10.png'">
+							<a
+							href="Systmebarrage.html"
+							target="FrameMain">
+								Syst&egrave;me barrage</a>
+
+				</li><li class="" id="Systmereflex" data="icon: '10.png'">
+							<a
+							href="Systmereflex.html"
+							target="FrameMain">
+								Syst&egrave;me reflex</a>
+
+				</li><li class="" id="Systmeproximit" data="icon: '10.png'">
+							<a
+							href="Systmeproximit.html"
+							target="FrameMain">
+								Syst&egrave;me proximit&eacute;</a>
+
+				</li></ul></li></ul></li><li class="folder" id="Lescapteursanalogiques" data="">
+							<a
+							href="Lescapteursanalogiques.html"
+							target="FrameMain">
+								Les capteurs analogiques</a>
+
+				<ul><li class="" id="Lescapteurspotentiomtriques" data="icon: '10.png'">
+							<a
+							href="Lescapteurspotentiomtriques.html"
+							target="FrameMain">
+								Les capteurs potentiom&eacute;triques</a>
+
+				</li></ul></li><li class="folder" id="CapteursnumriquesLescodeursrotat" data="">
+							<a
+							href="CapteursnumriquesLescodeursrotat.html"
+							target="FrameMain">
+								Capteurs num&eacute;riques : Les codeurs rotatifs</a>
+
+				<ul><li class="" id="Codeurincrmental" data="icon: '10.png'">
+							<a
+							href="Codeurincrmental.html"
+							target="FrameMain">
+								Codeur incr&eacute;mental</a>
+
+				</li><li class="" id="Codeurabsolu" data="icon: '10.png'">
+							<a
+							href="Codeurabsolu.html"
+							target="FrameMain">
+								Codeur absolu</a>
+
+				</li></ul></li><li class="folder" id="Ressourcescomplmentaires" data="icon: '14.png'">
+							<a
+							href="Ressourcescomplmentaires.html"
+							target="FrameMain">
+								Ressources compl&eacute;mentaires</a>
+
+				<ul><li class="" id="Pourallerplusloin" data="icon: '12.png'">
+							<a
+							href="Pourallerplusloin.html"
+							target="FrameMain">
+								Pour aller plus loin</a>
+
+				</li></ul></li><li class="folder" id="Activitslves" data="icon: '40.png'">
+							<a
+							href="Activitslves.html"
+							target="FrameMain">
+								Activit&eacute;s &eacute;l&egrave;ves</a>
+
+				<ul><li class="" id="Dtectiondobjets" data="icon: '26.png'">
+							<a
+							href="Dtectiondobjets.html"
+							target="FrameMain">
+								D&eacute;tection d'objets</a>
+
+				</li><li class="" id="Naturedelobjetdtecter" data="icon: '26.png'">
+							<a
+							href="Naturedelobjetdtecter.html"
+							target="FrameMain">
+								Nature de l'objet &agrave; d&eacute;tecter</a>
+
+				</li><li class="" id="Identificationsursystme" data="icon: '26.png'">
+							<a
+							href="Identificationsursystme.html"
+							target="FrameMain">
+								Identification sur syst&egrave;me</a>
+
+				</li><li class="" id="Documentrponse" data="icon: '22.png'">
+							<a
+							href="Documentrponse.html"
+							target="FrameMain">
+								Document r&eacute;ponse</a>
+
+				</li></ul></li><li class="" id="Sources" data="icon: '20.png'">
+							<a
+							href="Sources.html"
+							target="FrameMain">
+								Sources</a>
+
+				</li></ul>
+		</div>
+		
+		<div id="tab-search">
+			<form onsubmit="PerformSearch(); return false;">
+				<label for="search_value">Recherche:</label>
+				<input id="search_value" name="search_value"></input>
+				<input type="submit" value="Recherche"/>
+			</form>
+			<div id="search_results"></div>
+		</div>
+		
+		</div>
+    
+</body>
+
+</html>
+

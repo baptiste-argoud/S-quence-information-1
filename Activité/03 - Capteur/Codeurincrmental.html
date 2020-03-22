@@ -1,0 +1,131 @@
+﻿<html>
+	
+<head>
+	<title>Codeur incr&eacute;mental</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 3.8.0.560">
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #8080C0;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "index.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Codeurincrmental");
+			}
+		});
+	</script>
+</head>
+
+<body>
+
+	<div id="topic_header">
+			<div id="topic_header_content">
+				<h1>Codeur incr&eacute;mental</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="CapteursnumriquesLescodeursrotat.html">Capteurs num&eacute;riques : Les codeurs rotatifs</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="CapteursnumriquesLescodeursrotat.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="CapteursnumriquesLescodeursrotat.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Codeurabsolu.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<div class="rvps1"><table width="100%" border="1" cellpadding="0" cellspacing="0" style="border-width: 0px;">
+<tr valign="top">
+<td style="border-width : 1px; border-color: #000000; border-style: solid; border-top: none; border-right: none; border-bottom: none; border-left: none;"><p class="rvps1"><img alt="" style="padding : 1px;" src="lib/capteurs.jpg"/></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-width : 1px; border-color: #666699; border-style: solid; border-top: none; border-right: none; border-bottom: none; border-left: none;"><p class="rvps2"><span class="rvts14">Les capteurs numériques</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p class="rvps1"><span class="rvts18"><br/></span></p>
+<p class="rvps32"><span class="rvts27">Le codeur incrémental ou relatif est également appelé générateur d'impulsions.</span></p>
+<p class="rvps8"><span class="rvts27">Une ou deux pistes extérieures divisées en N intervalles d'angles égaux alternativement opaques et transparents.</span></p>
+<p class="rvps8"><span class="rvts27"><br/></span></p>
+<p class="rvps8"><span class="rvts27">Pour un tour complet de l'axe codeur, le faisceau lumineux est interrompu N fois et délivre N signaux carrés A et B en quadrature.</span></p>
+<p class="rvps8"><span class="rvts27"><br/></span></p>
+<p class="rvps8"><span class="rvts27">Le nombre de points par tour du capteur se nomme la résolution.</span></p>
+<p class="rvps8"><span class="rvts27"><br/></span></p>
+<p class="rvps8"><span class="rvts27">Le déphasage de 90° électrique des signaux A et B permet de déterminer le sens de rotation :</span></p>
+<p class="rvps8"><span class="rvts27"><br/></span></p>
+<p class="rvps33" style="text-indent: -19px; padding-left: 19px; margin-left: 72px;"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">□</span>
+<span class="rvts27">Dans un sens pendant le front montant du signal (A), le signal (B) est à zéro.</span></p>
+<p class="rvps33" style="text-indent: -19px; padding-left: 19px; margin-left: 72px;"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">□</span>
+<span class="rvts27">Dans l'autre sens pendant le front montant du signal (A), le signal (B) est à un.</span></p>
+<p class="rvps33" style="text-indent: -19px; padding-left: 19px; margin-left: 72px;"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">□</span>
+<span class="rvts27">La piste intérieure (Z = top zéro) comporte une seule fenêtre transparente et délivre un seul signal par tour.</span></p>
+<p class="rvps33" style="text-indent: -19px; padding-left: 19px; margin-left: 72px;"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">□</span>
+<span class="rvts27">Ce signal (Z) d'une durée 90° électrique détermine une position de référence et permet la réinitialisation à chaque tour.</span></p>
+<p class="rvps33" style="text-indent: -19px; padding-left: 19px; margin-left: 72px;"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">□</span>
+<span class="rvts27">Le comptage décomptage des impulsions par l'unité de traitement permet de définir la position du mobile.</span></p>
+<p class="rvps4"><span class="rvts27"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/NouvelElement114.jpg"/></p>
+<p class="rvps4"><br/></p>
+<p class="rvps4"><br/></p>
+<p class="rvps4"><br/></p>
+<p class="rvps4"><br/></p>
+<p class="rvps4"><br/></p>
+<p class="rvps4"><br/></p>
+<p class="rvps1"><span class="rvts27">Ci-dessous une animation pour mieux comprendre le codeur incrémental relatif ou absolu :</span></p>
+<p class="rvps13"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="640" height="400"><param name="movie" value="lib/codeur.swf"><param name="quality" value="high"><param name="loop" value="true"><embed src="lib/codeur.swf" quality="high" width="640" height="400" loop="0" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></embed></object></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p class="rvps1"><span class="rvts27"><br/></span></p>
+<p></p>
+<p class="rvps3"><span class="rvts16">Créé avec HelpNDoc Personal Edition: </span><a class="rvts17" href="http://www.helpndoc.com/fr/tour-des-fonctionnalites/creer-ebooks-pour-kindle-amazon">Produire facilement des livres électroniques Kindle</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				www.mysti2d.net</div>
+		</div>
+	</body>
+	
+</html>
+
